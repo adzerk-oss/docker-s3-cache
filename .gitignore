@@ -1,0 +1,16 @@
+*.swn
+*.swo
+*.swp
+\#*\#
+.\#*
+*~
+.boot/
+.nrepl-port
+.nrepl-history
+zzz/
+.elasticbeanstalk
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
