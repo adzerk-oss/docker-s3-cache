@@ -14,6 +14,7 @@ RUN apt-get update
 RUN apt-get install datadog-agent
 
 ADD datadog.conf /etc/dd-agent/datadog.conf
+ADD varnish.yaml /etc/dd-agent/varnish.yaml
 ADD default.vcl /etc/varnish/default.vcl
 ADD start.sh /start.sh
 

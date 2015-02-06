@@ -19,4 +19,5 @@ echo http://$(ip addr |grep -A2 'state UP' |tail -1 |awk '{print $2}' |cut -d/ -
 echo "********************************************************************************"
 
 varnishd -f /etc/varnish/default.vcl -s malloc,100M -a 0.0.0.0:${VARNISH_PORT}
+varnishstat -1  && echo -e "\e[0;32mVarnishStat - OK\e[0m" || \ || echo -e "\e[0;31mVarnishStat - ERROR\e[0m"
 varnishlog
