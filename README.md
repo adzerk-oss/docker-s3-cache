@@ -6,12 +6,7 @@ for sites deployed to S3.
 * Ready to deploy to Elastic Beanstalk.
 * Caches requests to websites deployed to S3.
 * Alters 302 (Moved Temporarily) responses from S3 to 301's (Moved Permanently).
-
-## Build & Test
-
-To build the image and run it locally for testing:
-
-    $ make build ; make run
+* Optional [datadog](http://datadoghq.com) reporting (see below).
 
 ## Configure
 
@@ -23,8 +18,29 @@ The image configures itself via environment variables:
   as the `Host` header of every request (this will be something like `example.com`).
 * `VARNISH_BACKEND_PORT` &mdash; the port the backend is listening on (optional,
   defaults to 80).
+* `DATADOG_API_KEY` &mdash; your [datadog](http://datadoghq.com) API key (datadog
+  agent won't be started if this isn't provided).
+* `DATADOG_TAGS` &mdash; (optional) comma-delimited list of tags
 
-These env variables can be set in the Beanstalk environment configuration.
+These env variables can be set in the Beanstalk environment configuration or
+locally in a `docker.env` file (loaded via the `--env-file` option to docker).
+
+## Build & Test
+
+Then build the image and run it locally:
+
+    $ make build ; make run
+
+You'll see a message like this:
+
+    ********************************************************************************
+    TEST URL:
+    http://172.17.0.20/
+    ********************************************************************************
+
+You can open the test URL in your browser or use `curl(1)` to see the proxy in
+action.
+
 
 ## Deploy to Beanstalk
 
