@@ -13,10 +13,10 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
 RUN apt-get update
 RUN apt-get install datadog-agent
 
-ADD datadog.conf /etc/dd-agent/datadog.conf
+ADD datadog.conf /etc/dd-agent/datadog.conf.in
 ADD varnish.yaml /etc/dd-agent/conf.d/varnish.yaml
-ADD default.vcl /etc/varnish/default.vcl
-ADD start.sh /start.sh
+ADD default.vcl  /etc/varnish/default.vcl.in
+ADD start.sh     /start.sh
 
 EXPOSE 80
 ENTRYPOINT ["/start.sh"]
