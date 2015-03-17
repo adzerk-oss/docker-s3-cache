@@ -30,4 +30,4 @@ echo TEST URL:
 echo http://$(public_ip)/
 echo "********************************************************************************"
 
-varnishlog
+/bin/bash
