@@ -45,3 +45,22 @@ to docker), e.g.
 and start the container:
 
     make run
+
+## Deploy to Beanstalk
+
+You just need a `Dockerrun.aws.json` file with the following contents:
+
+    {
+      "AWSEBDockerrunVersion": "1",
+      "Image": {
+        "Name": "adzerk/s3-cache",
+        "Update": "true"
+      },
+      "Ports": [
+        {
+          "ContainerPort": "80"
+        }
+      ],
+      "Volumes": [],
+      "Logging": "/var/log/nginx"
+    }
