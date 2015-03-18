@@ -8,6 +8,8 @@ for sites deployed to S3.
 * Alters 302 (Moved Temporarily) responses from S3 to 301's (Moved Permanently).
 * Optional [datadog](http://datadoghq.com) reporting (see below).
 
+[In the DockerHub registry here.](https://registry.hub.docker.com/u/adzerk/s3-cache/)
+
 ```
 docker run \
   --env VARNISH_BACKEND_HOST=example.com \
