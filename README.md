@@ -29,8 +29,6 @@ Then build the image and run it locally:
 
     $ make build ; make run
 
-You'll be delivered to a root shell in the container.
-
 ## Deploy to Beanstalk
 
 I use the [eb tool] for this. Everything you need should be in this repository
