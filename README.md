@@ -8,7 +8,14 @@ for sites deployed to S3.
 * Alters 302 (Moved Temporarily) responses from S3 to 301's (Moved Permanently).
 * Optional [datadog](http://datadoghq.com) reporting (see below).
 
-## Configure
+```
+docker run \
+  --env VARNISH_BACKEND_HOST=example.com \
+  --env VARNISH_BACKEND_ELB=example.com.s3-website-us-east-1.amazonaws.com \
+  adzerk/s3-cache
+```
+
+## Runtime Configuration
 
 The image configures itself via environment variables:
 
@@ -20,25 +27,21 @@ The image configures itself via environment variables:
 | `DATADOG_API_KEY`      | Your [datadog](http://datadoghq.com) API key (datadog agent won't be started if this isn't provided).     |
 | `DATADOG_TAGS`         | An optional, comma-delimited list of tags for datadog.                                                    |
 
-These env variables can be set in the Beanstalk environment configuration or
-locally in a `docker.env` file (loaded via the `--env-file` option to docker).
+These env variables can be set in the Beanstalk environment configuration.
 
-## Build & Test
+## Build & Test Locally
 
-Then build the image and run it locally:
+Then build the image:
 
-    $ make build ; make run
+    make build
 
-## Deploy to Beanstalk
+Create a `docker.env` file for testing (loaded via the `--env-file` option
+to docker), e.g.
 
-I use the [eb tool] for this. Everything you need should be in this repository
-already.
+    VARNISH_BACKEND_HOST=example.com
+    VARNISH_BACKEND_ELB=example.com.s3-website-us-east-1.amazonaws.com
+    ...
 
-    $ eb init
-    $ eb create <my-env>
-    $ eb use <my-env>
-    $ eb deploy
+and start the container:
 
-Have fun!
-
-[eb tool]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-reference-eb.html
+    make run
