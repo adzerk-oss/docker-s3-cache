@@ -14,11 +14,11 @@ The image configures itself via environment variables:
 
 | Environment Variable   | Description                                                                                               |
 |------------------------|-----------------------------------------------------------------------------------------------------------|
-| `VARNISH_BACKEND_IP`   | The hostname or IP address of the backend server (e.g. `example.com.s3-website-us-east-1.amazonaws.com`). |
+| `VARNISH_BACKEND_ELB`  | The hostname of the S3 ELB (e.g. `example.com.s3-website-us-east-1.amazonaws.com`).                       |
 | `VARNISH_BACKEND_HOST` | The hostname to be sent to the backend as the `Host` header (e.g. `example.com`).                         |
 | `VARNISH_BACKEND_PORT` | The port the backend will listening on (optional, defaults to 80).                                        |
 | `DATADOG_API_KEY`      | Your [datadog](http://datadoghq.com) API key (datadog agent won't be started if this isn't provided).     |
-| `DATADOG_TAGS`         | An optional, comma-delimited list of tags.                                                                |
+| `DATADOG_TAGS`         | An optional, comma-delimited list of tags for datadog.                                                    |
 
 These env variables can be set in the Beanstalk environment configuration or
 locally in a `docker.env` file (loaded via the `--env-file` option to docker).
@@ -29,16 +29,7 @@ Then build the image and run it locally:
 
     $ make build ; make run
 
-You'll see a message like this:
-
-    ********************************************************************************
-    TEST URL:
-    http://172.17.0.20/
-    ********************************************************************************
-
-You can open the test URL in your browser or use `curl(1)` to see the proxy in
-action.
-
+You'll be delivered to a root shell in the container.
 
 ## Deploy to Beanstalk
 

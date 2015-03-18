@@ -1,5 +1,9 @@
 #!/bin/bash
 
+VARNISH_BACKEND_PORT=${VARNISH_BACKEND_PORT-80}
+VARNISH_BACKEND_ELB=${VARNISH_BACKEND_ELB-example.com}
+VARNISH_BACKEND_HOST=${VARNISH_BACKEND_HOST-example.com}
+
 function replace_env() {
   local file="${1?}"
   shift
@@ -10,24 +14,14 @@ function replace_env() {
   done
 }
 
-function public_ip() {
-  ip addr |grep -A2 'state UP' |tail -1 |awk '{print $2}' |cut -d/ -f1
-}
-
-replace_env /etc/varnish/default.vcl VARNISH_BACKEND_PORT VARNISH_BACKEND_IP VARNISH_BACKEND_HOST
+replace_env /etc/nginx/nginx.conf VARNISH_BACKEND_PORT VARNISH_BACKEND_ELB VARNISH_BACKEND_HOST
 
 if [ -n "$DATADOG_API_KEY" ]; then
   replace_env /etc/dd-agent/datadog.conf DATADOG_API_KEY DATADOG_TAGS
   /etc/init.d/datadog-agent start
 fi
 
+/etc/init.d/nginx start
 varnishd -f /etc/varnish/default.vcl -s malloc,100M -a 0.0.0.0:${VARNISH_PORT}
-
-[ -z "$(public_ip)" ] && sleep 1
-
-echo "********************************************************************************"
-echo TEST URL:
-echo http://$(public_ip)/
-echo "********************************************************************************"
 
 /bin/bash

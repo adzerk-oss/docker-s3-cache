@@ -3,6 +3,9 @@
 FROM jacksoncage/varnish
 MAINTAINER Micha Niskin <micha@adzerk.com>
 
+RUN apt-get update
+RUN apt-get install -y nginx
+
 ENV VARNISH_PORT 80
 ENV VARNISH_BACKEND_PORT 80
 ENV VARNISH_BACKEND_IP example.com
@@ -15,7 +18,8 @@ RUN apt-get install datadog-agent
 
 ADD datadog.conf /etc/dd-agent/datadog.conf.in
 ADD varnish.yaml /etc/dd-agent/conf.d/varnish.yaml
-ADD default.vcl  /etc/varnish/default.vcl.in
+ADD default.vcl  /etc/varnish/default.vcl
+ADD nginx.conf   /etc/nginx/nginx.conf.in
 ADD start.sh     /start.sh
 
 EXPOSE 80

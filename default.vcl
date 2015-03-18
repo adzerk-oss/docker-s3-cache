@@ -2,12 +2,8 @@
 # man page for details on VCL syntax and semantics.
 #
 backend default {
-  .host = "${VARNISH_BACKEND_IP}";
-  .port = "${VARNISH_BACKEND_PORT}";
-}
-
-sub vcl_recv {
-  set req.http.host = "${VARNISH_BACKEND_HOST}";
+  .host = "127.0.0.1";
+  .port = "8080";
 }
 
 sub vcl_fetch {
