@@ -1,14 +1,12 @@
 # docker-s3-cache
 
-Docker image with Varnish cache for use in Elastic Beanstalk &mdash; caching
-for sites deployed to S3.
+[Docker image][dockerhub] with Varnish cache for use in Elastic Beanstalk &mdash;
+caching for sites deployed to S3.
 
 * Ready to deploy to Elastic Beanstalk.
 * Caches requests to websites deployed to S3.
 * Alters 302 (Moved Temporarily) responses from S3 to 301's (Moved Permanently).
 * Optional [datadog](http://datadoghq.com) reporting (see below).
-
-[In the DockerHub registry here.](https://registry.hub.docker.com/u/adzerk/s3-cache/)
 
 ```
 docker run \
@@ -66,3 +64,5 @@ You just need a `Dockerrun.aws.json` file with the following contents:
       "Volumes": [],
       "Logging": "/var/log/nginx"
     }
+
+[dockerhub]: https://registry.hub.docker.com/u/adzerk/s3-cache/
