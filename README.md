@@ -8,12 +8,28 @@ caching for sites deployed to S3.
 * Alters 302 (Moved Temporarily) responses from S3 to 301's (Moved Permanently).
 * Optional [datadog](http://datadoghq.com) reporting (see below).
 
+## Try It
+
 ```
 docker run \
   --env VARNISH_BACKEND_HOST=example.com \
   --env VARNISH_BACKEND_ELB=example.com.s3-website-us-east-1.amazonaws.com \
   adzerk/s3-cache
 ```
+
+## Overview
+
+This container provides three main components:
+
+* The Varnish caching HTTP proxy configured to listen on port 80 and pass HTTP
+  requests to localhost port 8080. Any `302` status response is changed to a
+  `301` status before being sent to the client.
+
+* An Nginx reverse proxy configured to listen on localhost port 8080 and pass
+  HTTP requests to an S3 website hosting bucket ELB. Nginx is needed to resolve
+  the ELB's IP address at runtime (Varnish can't do this).
+
+* The DataDog agent daemon for container metrics.
 
 ## Runtime Configuration
 
