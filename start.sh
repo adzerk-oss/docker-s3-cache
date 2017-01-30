@@ -29,5 +29,4 @@ if [ -n "$DATADOG_API_KEY" ]; then
 fi
 
 /etc/init.d/nginx start
-varnishd -f /etc/varnish/default.vcl -s malloc,100M -a 0.0.0.0:${VARNISH_PORT}
-varnishlog
+varnishd -F -f /etc/varnish/default.vcl -s malloc,100M -a 0.0.0.0:${VARNISH_PORT}
