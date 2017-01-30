@@ -35,13 +35,15 @@ This container provides three main components:
 
 The image configures itself via environment variables:
 
-| Environment Variable   | Description                                                                                               |
-|------------------------|-----------------------------------------------------------------------------------------------------------|
-| `VARNISH_BACKEND_ELB`  | The hostname of the S3 ELB (e.g. `example.com.s3-website-us-east-1.amazonaws.com`).                       |
-| `VARNISH_BACKEND_HOST` | The hostname to be sent to the backend as the `Host` header (e.g. `example.com`).                         |
-| `VARNISH_BACKEND_PORT` | The port the backend will listening on (optional, defaults to 80).                                        |
-| `DATADOG_API_KEY`      | Your [datadog](http://datadoghq.com) API key (datadog agent won't be started if this isn't provided).     |
-| `DATADOG_TAGS`         | An optional, comma-delimited list of tags for datadog.                                                    |
+| Environment Variable             | Description                                                                                           |
+|----------------------------------|-------------------------------------------------------------------------------------------------------|
+| `VARNISH_BACKEND_ELB`            | The hostname of the S3 ELB (e.g. `example.com.s3-website-us-east-1.amazonaws.com`).                   |
+| `VARNISH_BACKEND_HOST`           | The hostname to be sent to the backend as the `Host` header (e.g. `example.com`).                     |
+| `VARNISH_BACKEND_PORT`           | The port the backend will listening on (optional, defaults to 80).                                    |
+| `VARNISH_BACKEND_FORCE_SSL`      | When set to "true", rewrite requests to SSL                                                           |
+| `VARNISH_BACKEND_FORCE_SSL_HOST` | For use with VARNISH_BACKEND_FORCE_SSL. https host to redirect to.                                    |
+| `DATADOG_API_KEY`                | Your [datadog](http://datadoghq.com) API key (datadog agent won't be started if this isn't provided). |
+| `DATADOG_TAGS`                   | An optional, comma-delimited list of tags for datadog.                                                |
 
 These env variables can be set in the Beanstalk environment configuration.
 
